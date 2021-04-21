@@ -1,35 +1,29 @@
 package com.appstudiomr.apps.alarma.alarms.application;
 
 import com.appstudiomr.apps.alarma.alarms.application.port.AlarmNotificationUseCase;
-import com.appstudiomr.apps.alarma.fcm.PushNotificationRequest;
-import com.appstudiomr.apps.alarma.fcm.PushNotificationService;
+import com.appstudiomr.apps.alarma.notification.application.port.PushNotificationUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class AlarmNotificationService implements AlarmNotificationUseCase {
 
-    private final PushNotificationService notificationService;
+    private final PushNotificationUseCase notificationUseCase;
 
     @Override
     public SendNotificationResponse sendNotification(SendNotificationCommand command) {
-        PushNotificationRequest notificationRequest = PushNotificationRequest.builder()
+        PushNotificationUseCase.SendPushWithDataCommand pushCommand = PushNotificationUseCase.SendPushWithDataCommand.builder()
                 .title(command.getTitle())
-                .message(command.getMessage())
+                .message(command.getFireBrigadeName())
                 .topic(command.getTopic())
+                .data("alarmId", command.getAlarmId())
+                .data("senderId", command.getSenderId())
+                .data("fireBrigadeName", command.getFireBrigadeName())
                 .build();
 
-        Map<String, String> alarmData = new HashMap<>();
-        alarmData.put("alarmId", command.getAlarmId());
-        alarmData.put("senderId", command.getSenderId());
-        alarmData.put("fireBrigadeName", command.getMessage());
-
         try {
-            notificationService.sendPushNotificationWithDataOnly(notificationRequest, alarmData);
+            notificationUseCase.sendPushWithData(pushCommand);
             return SendNotificationResponse.success();
         } catch (Exception e) {
             return SendNotificationResponse.failure(e.getMessage());

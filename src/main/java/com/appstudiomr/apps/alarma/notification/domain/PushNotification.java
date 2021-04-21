@@ -1,15 +1,13 @@
-package com.appstudiomr.apps.alarma.fcm;
+package com.appstudiomr.apps.alarma.notification.domain;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
-@NoArgsConstructor
 @Builder
-public class PushNotificationRequest {
+public class PushNotification {
     private String title;
     private String message;
     private String topic;

@@ -15,10 +15,10 @@ public interface AlarmNotificationUseCase {
     @Builder
     class SendNotificationCommand {
         String title;
-        String message;
         String topic;
         String alarmId;
         String senderId;
+        String fireBrigadeName;
     }
 
     @Value

@@ -1,5 +1,6 @@
 package com.appstudiomr.apps.alarma.fcm;
 
+import com.appstudiomr.apps.alarma.notification.domain.PushNotification;
 import com.google.firebase.messaging.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -11,9 +12,7 @@ import java.util.concurrent.ExecutionException;
 
 @Service
 public class FCMService {
-
-
-    public void sendMessageWithDataAndNotificationToTopic(Map<String, String> data, PushNotificationRequest request)
+    public void sendMessageWithDataAndNotificationToTopic(Map<String, String> data, PushNotification request)
             throws InterruptedException, ExecutionException {
         Message message = getPreconfiguredMessageWithData(data, request);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -22,7 +21,7 @@ public class FCMService {
         System.out.println("Sent message with data. Topic: " + request.getTopic() + ", " + response + " msg " + jsonOutput);
     }
 
-    public void sendMessageWithDataOnlyToTopic(Map<String, String> data, PushNotificationRequest request)
+    public void sendMessageWithDataOnlyToTopic(Map<String, String> data, PushNotification request)
             throws InterruptedException, ExecutionException {
         Message message = getPreconfiguredMessageWithDataForTopic(data, request);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -31,14 +30,14 @@ public class FCMService {
         System.out.println("Sent message with data. Topic: " + request.getTopic() + ", " + response + " msg " + jsonOutput);
     }
 
-    public void sendMessageWithoutDataToTopic(PushNotificationRequest request)
+    public void sendMessageWithoutDataToTopic(PushNotification request)
             throws InterruptedException, ExecutionException {
         Message message = getPreconfiguredMessageWithoutData(request);
         String response = sendAndGetResponse(message);
         System.out.println("Sent message without data. Topic: " + request.getTopic() + ", " + response);
     }
 
-    public void sendMessageToToken(PushNotificationRequest request)
+    public void sendMessageToToken(PushNotification request)
             throws InterruptedException, ExecutionException {
         Message message = getPreconfiguredMessageToToken(request);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -51,27 +50,27 @@ public class FCMService {
         return FirebaseMessaging.getInstance().sendAsync(message).get();
     }
 
-    private Message getPreconfiguredMessageToToken(PushNotificationRequest request) {
+    private Message getPreconfiguredMessageToToken(PushNotification request) {
         return getPreconfiguredMessageBuilder(request).setToken(request.getToken())
                 .build();
     }
 
-    private Message getPreconfiguredMessageWithoutData(PushNotificationRequest request) {
+    private Message getPreconfiguredMessageWithoutData(PushNotification request) {
         return getPreconfiguredMessageBuilder(request).setTopic(request.getTopic())
                 .build();
     }
 
-    private Message getPreconfiguredMessageWithData(Map<String, String> data, PushNotificationRequest request) {
+    private Message getPreconfiguredMessageWithData(Map<String, String> data, PushNotification request) {
         return getPreconfiguredMessageBuilder(request).putAllData(data).setToken(request.getToken())
                 .build();
     }
 
-    private Message getPreconfiguredMessageWithDataForTopic(Map<String, String> data, PushNotificationRequest request) {
+    private Message getPreconfiguredMessageWithDataForTopic(Map<String, String> data, PushNotification request) {
         return getPreconfiguredMessageBuilderWithoutNotification(request).putAllData(data).setTopic(request.getTopic())
                 .build();
     }
 
-    private Message.Builder getPreconfiguredMessageBuilder(PushNotificationRequest request) {
+    private Message.Builder getPreconfiguredMessageBuilder(PushNotification request) {
         AndroidConfig androidConfig = getAndroidConfig(request.getTopic());
         ApnsConfig apnsConfig = getApnsConfig(request.getTopic());
 
@@ -96,7 +95,7 @@ public class FCMService {
                 .setAps(Aps.builder().setCategory(topic).setThreadId(topic).build()).build();
     }
 
-    private Message.Builder getPreconfiguredMessageBuilderWithoutNotification(PushNotificationRequest request) {
+    private Message.Builder getPreconfiguredMessageBuilderWithoutNotification(PushNotification request) {
         AndroidConfig androidConfig = getAndroidConfigWithoutNotification(request.getTopic());
         ApnsConfig apnsConfig = getApnsConfig(request.getTopic());
 
