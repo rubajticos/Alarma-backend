@@ -17,10 +17,11 @@ public class AlarmNotificationService implements AlarmNotificationUseCase {
 
     @Override
     public SendNotificationResponse sendNotification(SendNotificationCommand command) {
-        PushNotificationRequest notificationRequest = new PushNotificationRequest();
-        notificationRequest.setTitle(command.getTitle());
-        notificationRequest.setMessage(command.getMessage());
-        notificationRequest.setTopic(command.getTopic());
+        PushNotificationRequest notificationRequest = PushNotificationRequest.builder()
+                .title(command.getTitle())
+                .message(command.getMessage())
+                .topic(command.getTopic())
+                .build();
 
         Map<String, String> alarmData = new HashMap<>();
         alarmData.put("alarmId", command.getAlarmId());
