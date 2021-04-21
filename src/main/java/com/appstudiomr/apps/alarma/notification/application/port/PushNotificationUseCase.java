@@ -13,9 +13,9 @@ public interface PushNotificationUseCase {
 
     void sendPushWithData(SendPushWithDataCommand command) throws ExecutionException, InterruptedException;
 
-    void sendPushNotificationToTopic(SendPushNotificationToTopicCommand command);
+    void sendPushNotificationToTopic(SendPushNotificationToTopicCommand command) throws ExecutionException, InterruptedException;
 
-    void sendPushNotificationToToken(SendPushNotificationToTokenCommand command);
+    void sendPushNotificationToToken(SendPushNotificationToTokenCommand command) throws ExecutionException, InterruptedException;
 
     @Value
     @Builder

@@ -1,6 +1,7 @@
 package com.appstudiomr.apps.alarma.notification.infrastructure;
 
 import com.appstudiomr.apps.alarma.notification.domain.NotificationParameter;
+import com.appstudiomr.apps.alarma.notification.domain.PushDataNotification;
 import com.appstudiomr.apps.alarma.notification.domain.PushNotification;
 import com.appstudiomr.apps.alarma.notification.domain.PushNotificationSender;
 import com.google.firebase.messaging.*;
@@ -15,23 +16,23 @@ import java.util.concurrent.ExecutionException;
 @Service
 public class FirebaseCloudMessagingService implements PushNotificationSender {
     @Override
-    public void sendMessageWithDataAndNotificationToTopic(Map<String, String> data, PushNotification request)
+    public void sendMessageWithDataAndNotificationToTopic(PushDataNotification request)
             throws InterruptedException, ExecutionException {
-        Message message = getPreconfiguredMessageWithData(data, request);
+        Message message = getPreconfiguredMessageWithData(request.getNotificationData(), request.getNotification());
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonOutput = gson.toJson(message);
         String response = sendAndGetResponse(message);
-        System.out.println("Sent message with data. Topic: " + request.getTopic() + ", " + response + " msg " + jsonOutput);
+        System.out.println("Sent message with data. Topic: " + request.getNotification().getTopic() + ", " + response + " msg " + jsonOutput);
     }
 
     @Override
-    public void sendMessageWithDataOnlyToTopic(Map<String, String> data, PushNotification request)
+    public void sendMessageWithDataOnlyToTopic(PushDataNotification request)
             throws InterruptedException, ExecutionException {
-        Message message = getPreconfiguredMessageWithDataForTopic(data, request);
+        Message message = getPreconfiguredMessageWithDataForTopic(request.getNotificationData(), request.getNotification());
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonOutput = gson.toJson(message);
         String response = sendAndGetResponse(message);
-        System.out.println("Sent message with data. Topic: " + request.getTopic() + ", " + response + " msg " + jsonOutput);
+        System.out.println("Sent message with data. Topic: " + request.getNotification().getTopic() + ", " + response + " msg " + jsonOutput);
     }
 
     @Override
