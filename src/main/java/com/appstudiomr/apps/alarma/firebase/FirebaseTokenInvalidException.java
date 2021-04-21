@@ -1,4 +1,4 @@
-package com.appstudiomr.apps.alarma.exception;
+package com.appstudiomr.apps.alarma.firebase;
 
 import org.springframework.security.authentication.BadCredentialsException;
 

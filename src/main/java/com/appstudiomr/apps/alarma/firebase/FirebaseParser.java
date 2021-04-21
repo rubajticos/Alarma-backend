@@ -1,7 +1,6 @@
-package com.appstudiomr.apps.alarma.service.shared;
+package com.appstudiomr.apps.alarma.firebase;
 
-import com.appstudiomr.apps.alarma.config.firebase.FirebaseTokenHolder;
-import com.appstudiomr.apps.alarma.exception.FirebaseTokenInvalidException;
+import com.appstudiomr.apps.alarma.security.firebase.FirebaseTokenHolder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseToken;
 import org.apache.commons.lang3.StringUtils;

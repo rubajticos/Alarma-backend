@@ -1,4 +1,4 @@
-package com.appstudiomr.apps.alarma.fcm;
+package com.appstudiomr.apps.alarma.firebase;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -15,12 +15,12 @@ import java.nio.charset.StandardCharsets;
 
 @Configuration
 @Service
-public class FCMInitializer {
+public class FirebaseInitializer {
 
     private Environment env;
 
     @Autowired
-    public FCMInitializer(Environment env) {
+    public FirebaseInitializer(Environment env) {
         this.env = env;
     }
 

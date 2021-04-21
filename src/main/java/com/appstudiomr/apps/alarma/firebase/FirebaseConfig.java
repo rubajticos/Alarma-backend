@@ -1,4 +1,4 @@
-package com.appstudiomr.apps.alarma.fcm;
+package com.appstudiomr.apps.alarma.firebase;
 
 
 import com.google.gson.Gson;

@@ -1,4 +1,4 @@
-package com.appstudiomr.apps.alarma.config.firebase;
+package com.appstudiomr.apps.alarma.security.firebase;
 
 import com.google.api.client.util.ArrayMap;
 import com.google.firebase.auth.FirebaseToken;

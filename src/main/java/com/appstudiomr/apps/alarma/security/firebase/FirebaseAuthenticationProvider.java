@@ -1,4 +1,4 @@
-package com.appstudiomr.apps.alarma.config.firebase;
+package com.appstudiomr.apps.alarma.security.firebase;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;

@@ -1,8 +1,8 @@
-package com.appstudiomr.apps.alarma.config;
+package com.appstudiomr.apps.alarma.security;
 
-import com.appstudiomr.apps.alarma.config.firebase.FirebaseAuthenticationProvider;
-import com.appstudiomr.apps.alarma.config.firebase.FirebaseFilter;
-import com.appstudiomr.apps.alarma.service.FirebaseService;
+import com.appstudiomr.apps.alarma.security.firebase.FirebaseAuthenticationProvider;
+import com.appstudiomr.apps.alarma.security.firebase.FirebaseFilter;
+import com.appstudiomr.apps.alarma.firebase.FirebaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;

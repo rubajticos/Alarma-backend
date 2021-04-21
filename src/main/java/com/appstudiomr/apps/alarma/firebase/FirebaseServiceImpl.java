@@ -1,7 +1,6 @@
-package com.appstudiomr.apps.alarma.service;
+package com.appstudiomr.apps.alarma.firebase;
 
-import com.appstudiomr.apps.alarma.config.firebase.FirebaseTokenHolder;
-import com.appstudiomr.apps.alarma.service.shared.FirebaseParser;
+import com.appstudiomr.apps.alarma.security.firebase.FirebaseTokenHolder;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,4 +1,4 @@
-package com.appstudiomr.apps.alarma.config.firebase;
+package com.appstudiomr.apps.alarma.security.firebase;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;

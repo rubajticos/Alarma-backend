@@ -1,7 +1,7 @@
-package com.appstudiomr.apps.alarma.config.firebase;
+package com.appstudiomr.apps.alarma.security.firebase;
 
-import com.appstudiomr.apps.alarma.exception.FirebaseTokenInvalidException;
-import com.appstudiomr.apps.alarma.service.FirebaseService;
+import com.appstudiomr.apps.alarma.firebase.FirebaseTokenInvalidException;
+import com.appstudiomr.apps.alarma.firebase.FirebaseService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
