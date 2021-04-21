@@ -1,6 +1,5 @@
 package com.appstudiomr.apps.alarma.notification.web;
 
-import com.appstudiomr.apps.alarma.fcm.PushNotificationResponse;
 import com.appstudiomr.apps.alarma.notification.application.port.PushNotificationUseCase;
 import com.appstudiomr.apps.alarma.notification.application.port.PushNotificationUseCase.SendPushNotificationToTokenCommand;
 import com.appstudiomr.apps.alarma.notification.application.port.PushNotificationUseCase.SendPushNotificationToTopicCommand;

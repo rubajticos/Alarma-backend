@@ -1,6 +1,6 @@
 package com.appstudiomr.apps.alarma.notification.application;
 
-import com.appstudiomr.apps.alarma.fcm.FCMService;
+import com.appstudiomr.apps.alarma.notification.domain.PushNotificationSender;
 import com.appstudiomr.apps.alarma.notification.application.port.PushNotificationUseCase;
 import com.appstudiomr.apps.alarma.notification.domain.PushNotification;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutionException;
 @Service
 @AllArgsConstructor
 class PushNotificationService implements PushNotificationUseCase {
-    private final FCMService fcmService;
+    private final PushNotificationSender notificationSender;
 
     public void sendPushNotificationAndData(SendPushNotificationAndDataCommand command) throws ExecutionException, InterruptedException {
         PushNotification notification = PushNotification.builder()
@@ -20,7 +20,7 @@ class PushNotificationService implements PushNotificationUseCase {
                 .topic(command.getTopic())
                 .build();
 
-        fcmService.sendMessageWithDataAndNotificationToTopic(command.getData(), notification);
+        notificationSender.sendMessageWithDataAndNotificationToTopic(command.getData(), notification);
     }
 
     public void sendPushWithData(SendPushWithDataCommand command) throws ExecutionException, InterruptedException {
@@ -30,7 +30,7 @@ class PushNotificationService implements PushNotificationUseCase {
                 .topic(command.getTopic())
                 .build();
 
-        fcmService.sendMessageWithDataOnlyToTopic(command.getData(), notification);
+        notificationSender.sendMessageWithDataOnlyToTopic(command.getData(), notification);
     }
 
     public void sendPushNotificationToTopic(SendPushNotificationToTopicCommand command) {
@@ -41,7 +41,7 @@ class PushNotificationService implements PushNotificationUseCase {
                     .topic(command.getTopic())
                     .build();
 
-            fcmService.sendMessageWithoutDataToTopic(notification);
+            notificationSender.sendMessageWithoutDataToTopic(notification);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -55,7 +55,7 @@ class PushNotificationService implements PushNotificationUseCase {
                     .token(command.getToken())
                     .build();
 
-            fcmService.sendMessageToToken(notification);
+            notificationSender.sendMessageToToken(notification);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

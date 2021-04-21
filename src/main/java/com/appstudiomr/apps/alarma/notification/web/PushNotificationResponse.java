@@ -1,4 +1,4 @@
-package com.appstudiomr.apps.alarma.fcm;
+package com.appstudiomr.apps.alarma.notification.web;
 
 public class PushNotificationResponse {
     private int status;

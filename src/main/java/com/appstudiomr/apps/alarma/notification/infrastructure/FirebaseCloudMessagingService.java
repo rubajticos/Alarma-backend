@@ -1,6 +1,8 @@
-package com.appstudiomr.apps.alarma.fcm;
+package com.appstudiomr.apps.alarma.notification.infrastructure;
 
+import com.appstudiomr.apps.alarma.notification.domain.NotificationParameter;
 import com.appstudiomr.apps.alarma.notification.domain.PushNotification;
+import com.appstudiomr.apps.alarma.notification.domain.PushNotificationSender;
 import com.google.firebase.messaging.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -11,7 +13,8 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @Service
-public class FCMService {
+public class FirebaseCloudMessagingService implements PushNotificationSender {
+    @Override
     public void sendMessageWithDataAndNotificationToTopic(Map<String, String> data, PushNotification request)
             throws InterruptedException, ExecutionException {
         Message message = getPreconfiguredMessageWithData(data, request);
@@ -21,6 +24,7 @@ public class FCMService {
         System.out.println("Sent message with data. Topic: " + request.getTopic() + ", " + response + " msg " + jsonOutput);
     }
 
+    @Override
     public void sendMessageWithDataOnlyToTopic(Map<String, String> data, PushNotification request)
             throws InterruptedException, ExecutionException {
         Message message = getPreconfiguredMessageWithDataForTopic(data, request);
@@ -30,6 +34,7 @@ public class FCMService {
         System.out.println("Sent message with data. Topic: " + request.getTopic() + ", " + response + " msg " + jsonOutput);
     }
 
+    @Override
     public void sendMessageWithoutDataToTopic(PushNotification request)
             throws InterruptedException, ExecutionException {
         Message message = getPreconfiguredMessageWithoutData(request);
@@ -37,6 +42,7 @@ public class FCMService {
         System.out.println("Sent message without data. Topic: " + request.getTopic() + ", " + response);
     }
 
+    @Override
     public void sendMessageToToken(PushNotification request)
             throws InterruptedException, ExecutionException {
         Message message = getPreconfiguredMessageToToken(request);
