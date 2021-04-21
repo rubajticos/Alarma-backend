@@ -3,10 +3,8 @@ package com.appstudiomr.apps.alarma.config.firebase;
 import com.appstudiomr.apps.alarma.exception.FirebaseTokenInvalidException;
 import com.appstudiomr.apps.alarma.service.FirebaseService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
