@@ -13,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @AllArgsConstructor
-public class AlarmsController {
+public class AlarmNotificationController {
 
     private final AlarmNotificationUseCase notificationUseCase;
 

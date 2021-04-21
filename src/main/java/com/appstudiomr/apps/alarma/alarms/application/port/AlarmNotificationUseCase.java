@@ -13,7 +13,7 @@ public interface AlarmNotificationUseCase {
 
     @Value
     @Builder
-    public class SendNotificationCommand {
+    class SendNotificationCommand {
         String title;
         String message;
         String topic;
@@ -22,7 +22,7 @@ public interface AlarmNotificationUseCase {
     }
 
     @Value
-    public class SendNotificationResponse {
+    class SendNotificationResponse {
         boolean success;
         List<String> errors;
 
