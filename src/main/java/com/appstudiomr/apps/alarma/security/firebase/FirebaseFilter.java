@@ -42,6 +42,7 @@ public class FirebaseFilter extends OncePerRequestFilter {
                 filterChain.doFilter(request, response);
             } catch (FirebaseTokenInvalidException e) {
                 response.getWriter().println("Token is invalid");
+                System.out.println("Token ins invalid");
             }
         }
     }

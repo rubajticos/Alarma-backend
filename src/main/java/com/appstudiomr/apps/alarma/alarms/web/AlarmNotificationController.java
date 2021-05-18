@@ -20,6 +20,7 @@ public class AlarmNotificationController {
     @PostMapping("/alarm")
     public ResponseEntity<Void> sendAlarmNotification(@RequestBody SendNotificationCommand command) {
         SendNotificationResponse response = notificationUseCase.sendNotification(command);
+        System.out.println("Send notification response: " + response.toString());
 
         if (!response.isSuccess()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, response.getErrors().toString());
