@@ -22,6 +22,16 @@ public interface AlarmNotificationUseCase {
     }
 
     @Value
+    @Builder
+    class SendNotificationCommandOld {
+        String title;
+        String message;
+        String topic;
+        String alarmId;
+        String senderId;
+    }
+
+    @Value
     class SendNotificationResponse {
         boolean success;
         List<String> errors;

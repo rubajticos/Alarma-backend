@@ -17,9 +17,30 @@ public class AlarmNotificationController {
 
     private final AlarmNotificationUseCase notificationUseCase;
 
-    @PostMapping("/alarm")
+    @PostMapping("/alarmnew")
     public ResponseEntity<Void> sendAlarmNotification(@RequestBody SendNotificationCommand command) {
         SendNotificationResponse response = notificationUseCase.sendNotification(command);
+        System.out.println("Send notification response: " + response.toString());
+
+        if (!response.isSuccess()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, response.getErrors().toString());
+        }
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/alarm")
+    public ResponseEntity<Void> sendAlarmNotification(@RequestBody AlarmNotificationUseCase.SendNotificationCommandOld command) {
+
+        SendNotificationCommand newCommand = SendNotificationCommand.builder()
+                .title(command.getTitle())
+                .topic(command.getTopic())
+                .alarmId(command.getAlarmId())
+                .senderId(command.getSenderId())
+                .fireBrigadeName(command.getMessage())
+                .build();
+
+        SendNotificationResponse response = notificationUseCase.sendNotification(newCommand);
         System.out.println("Send notification response: " + response.toString());
 
         if (!response.isSuccess()) {
